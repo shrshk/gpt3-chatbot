@@ -14,6 +14,7 @@ import { autoUpdater } from 'electron-updater';
 import log from 'electron-log';
 import MenuBuilder from './menu';
 import { resolveHtmlPath } from './util';
+import { startWebsocket } from './chat-server';
 
 export default class AppUpdater {
   constructor() {
@@ -128,6 +129,7 @@ app
   .whenReady()
   .then(() => {
     createWindow();
+    startWebsocket();
     app.on('activate', () => {
       // On macOS it's common to re-create a window in the app when the
       // dock icon is clicked and there are no other windows open.

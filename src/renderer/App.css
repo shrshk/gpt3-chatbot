@@ -60,3 +60,13 @@ a:hover {
   align-items: center;
   margin: 20px 0;
 }
+
+.message-list {
+  flex: 1;
+  min-width: 140px;
+  overflow: auto;
+}
+
+.rce-mbox-text {
+  color: black;
+}
