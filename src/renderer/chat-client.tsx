@@ -35,7 +35,6 @@ const buildMessageObj = (message: string, userType: UserType) => {
 }
 
 export const ChatClient = () => {
-  //Public API that will echo messages sent to it back to the client
   const socketUrl = 'ws://localhost:4444'; // TO DO: set it from a config file.
   const [messageHistory, setMessageHistory] = useState([]);
   const [messageText, setMessageText] = useState('');
@@ -46,35 +45,27 @@ export const ChatClient = () => {
     if (lastMessage == null) {
       return;
     }
-    //const userMessageObj = buildMessageObj(messageText, UserType.USER);
     const botMessageObj = buildMessageObj(lastMessage.data, UserType.BOT);
     let messagesToAdd: any = [];
-    if (messageText!='') {
-      // messagesToAdd.push(userMessageObj);
-    }
     messagesToAdd.push(botMessageObj);
     setMessageHistory((prev:any) => prev.concat(messagesToAdd));
+    setMessageText('');
   }, [lastMessage, setMessageHistory]);
 
   const handleClickSendMessage = () => useCallback(() => {
     sendMessage(messageText);
-    const userMessageObj = buildMessageObj(messageText, UserType.USER);
-    setMessageHistory((prev:any) => prev.concat(userMessageObj));
+    addUserMessage();
   }, [messageText, setMessageText]);
 
   const handleEnterKey = () => {
     sendMessage(messageText);
+    addUserMessage();
+  }
+
+  const addUserMessage = () => {
     const userMessageObj = buildMessageObj(messageText, UserType.USER);
     setMessageHistory((prev:any) => prev.concat(userMessageObj));
   }
-
-  useEffect(() => {
-    // if (inputRef.current) {
-    //   console.log('calling clear');
-    // }
-    // inputClear();
-    setMessageText('');
-  }, [lastMessage])
 
   const connectionStatus = {
     [ReadyState.CONNECTING]: 'Connecting',
@@ -87,15 +78,13 @@ export const ChatClient = () => {
   return (
     <div>
       <span>The WebSocket is currently {connectionStatus}</span>
-      <span>value is {messageText}</span>
       <MessageList
         className='message-list'
         toBottomHeight={'100%'}
         dataSource={messageHistory}
       />
       <Input
-        placeholder="Mesajınızı buraya yazınız."
-        defaultValue=""
+        placeholder="Type Something..."
         onKeyPress={(e: any) => {
           if (e.shiftKey && e.charCode === 13) {
             return;

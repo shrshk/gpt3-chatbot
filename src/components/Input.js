@@ -36,7 +36,6 @@ export function Input(props) {
         value={props.value}
         className={classNames('rce-input')}
         placeholder={props.placeholder}
-        defaultValue={props.defaultValue}
         style={props.inputStyle}
         onChange={onChange}
         onCopy={props.onCopy}
@@ -63,7 +62,6 @@ export function Input(props) {
 Input.defaultProps = {
   type: 'text',
   placeholder: '',
-  defaultValue: '',
   onChange: null,
   rightButtons: null,
   leftButtons: null,
