@@ -13,7 +13,6 @@ body {
     #7a2c9e 129.35%
   );
   font-family: sans-serif;
-  overflow-y: hidden;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -70,3 +69,4 @@ a:hover {
 .rce-mbox-text {
   color: black;
 }
+
