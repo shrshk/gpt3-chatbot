@@ -6,13 +6,17 @@ import 'react-chat-elements/dist/main.css';
 const Chat = () => {
   return (
     <div>
-      Chat app is building....
-      <Link to='/'>
-        <button type="button">
-          Home
-        </button>
-      </Link>
-      <ChatClient />
+      <h1>Chat app is building....</h1>
+      <div>
+        <Link to='/'>
+          <button type="button">
+            Go back
+          </button>
+        </Link>
+      </div>
+      <div>
+        <ChatClient />
+      </div>
     </div>
   )
 }

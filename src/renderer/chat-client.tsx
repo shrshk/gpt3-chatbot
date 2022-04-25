@@ -78,32 +78,35 @@ export const ChatClient = () => {
   return (
     <div>
       <span>The WebSocket is currently {connectionStatus}</span>
-      <MessageList
-        className='message-list'
-        toBottomHeight={'100%'}
-        dataSource={messageHistory}
-      />
-      <Input
-        placeholder="Type Something..."
-        onKeyPress={(e: any) => {
-          if (e.shiftKey && e.charCode === 13) {
-            return;
-          }else if (e.charCode === 13) {
-            if (readyState !== ReadyState.OPEN) {
+      <div>
+        <MessageList
+          className='message-list'
+          toBottomHeight={'100%'}
+          dataSource={messageHistory}
+        />
+        <Input
+          placeholder="Type Something..."
+          onKeyPress={(e: any) => {
+            if (e.shiftKey && e.charCode === 13) {
               return;
+            }else if (e.charCode === 13) {
+              if (readyState !== ReadyState.OPEN) {
+                return;
+              }
+              handleEnterKey();
             }
-            handleEnterKey();
+          }}
+          value={messageText}
+          onChange={(e: any) => setMessageText(e.target.value)}
+          rightButtons={
+            <Button
+              text='enter'
+              disabled={readyState !== ReadyState.OPEN}
+              onClick={handleClickSendMessage()}
+            />
           }
-        }}
-        value={messageText}
-        onChange={(e: any) => setMessageText(e.target.value)}
-        rightButtons={
-          <Button
-            text='enter'
-            onClick={handleClickSendMessage()}
-          />
-        }
-      />
+        />
+      </div>
     </div>
   );
 };
