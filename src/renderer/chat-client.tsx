@@ -1,6 +1,7 @@
 import { useState, useCallback, useEffect } from "react";
 // @ts-ignore
-import { MessageList, Button, Input } from 'react-chat-elements';
+import { MessageList, Button } from 'react-chat-elements';
+import { Input } from 'components/Input';
 import useWebSocket, { ReadyState } from 'react-use-websocket';
 
 enum UserType {
@@ -45,11 +46,11 @@ export const ChatClient = () => {
     if (lastMessage == null) {
       return;
     }
-    const userMessageObj = buildMessageObj(messageText, UserType.USER);
+    //const userMessageObj = buildMessageObj(messageText, UserType.USER);
     const botMessageObj = buildMessageObj(lastMessage.data, UserType.BOT);
     let messagesToAdd: any = [];
     if (messageText!='') {
-      messagesToAdd.push(userMessageObj);
+      // messagesToAdd.push(userMessageObj);
     }
     messagesToAdd.push(botMessageObj);
     setMessageHistory((prev:any) => prev.concat(messagesToAdd));
@@ -57,11 +58,23 @@ export const ChatClient = () => {
 
   const handleClickSendMessage = () => useCallback(() => {
     sendMessage(messageText);
+    const userMessageObj = buildMessageObj(messageText, UserType.USER);
+    setMessageHistory((prev:any) => prev.concat(userMessageObj));
   }, [messageText, setMessageText]);
 
   const handleEnterKey = () => {
     sendMessage(messageText);
+    const userMessageObj = buildMessageObj(messageText, UserType.USER);
+    setMessageHistory((prev:any) => prev.concat(userMessageObj));
   }
+
+  useEffect(() => {
+    // if (inputRef.current) {
+    //   console.log('calling clear');
+    // }
+    // inputClear();
+    setMessageText('');
+  }, [lastMessage])
 
   const connectionStatus = {
     [ReadyState.CONNECTING]: 'Connecting',
@@ -74,6 +87,7 @@ export const ChatClient = () => {
   return (
     <div>
       <span>The WebSocket is currently {connectionStatus}</span>
+      <span>value is {messageText}</span>
       <MessageList
         className='message-list'
         toBottomHeight={'100%'}
