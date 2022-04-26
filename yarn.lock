@@ -6500,7 +6500,7 @@ mkdirp@^0.5.1, mkdirp@^0.5.4, mkdirp@^0.5.5:
   dependencies:
     minimist "^1.2.6"
 
-mkdirp@^1.0.3, mkdirp@^1.0.4:
+mkdirp@^1.0.3, mkdirp@^1.0.4, mkdirp@~1.0.4:
   version "1.0.4"
   resolved "https://registry.yarnpkg.com/mkdirp/-/mkdirp-1.0.4.tgz#3eb5ed62622756d79a5f0e2a221dfebad75c2f7e"
   integrity sha512-vVqVZQyf3WLx2Shd0qJ9xuvqgAyKPLAiqITEtqW0oIUjzo3PePDd6fW9iFz30ef7Ysp/oiWqbhszeGWW2T6Gzw==
@@ -6615,6 +6615,13 @@ node-int64@^0.4.0:
   version "0.4.0"
   resolved "https://registry.yarnpkg.com/node-int64/-/node-int64-0.4.0.tgz#87a9065cdb355d3182d8f94ce11188b825c68a3b"
   integrity sha1-h6kGXNs1XTGC2PlM4RGIuCXGijs=
+
+node-json-db@^1.5.0:
+  version "1.5.0"
+  resolved "https://registry.yarnpkg.com/node-json-db/-/node-json-db-1.5.0.tgz#9e796654d01f2eed5bc7df9aa25a8f23fdf5743f"
+  integrity sha512-nDD+NgmKE5gxhC9d/MNUmm4NjzKnPRN7uIG6Z167+SVfK2vEVTiKw9ca05/6PLxQAUFP3VOL86K5nPsapFP94w==
+  dependencies:
+    mkdirp "~1.0.4"
 
 node-releases@^2.0.3:
   version "2.0.3"

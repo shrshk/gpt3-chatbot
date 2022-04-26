@@ -1,10 +1,12 @@
 import http from 'http';
 import * as WebSocket from 'ws';
 import { createCompletion } from './openai';
+import { backUpHistory } from './backup-history';
 
 const port = 4444;
 const server = http.createServer();
 const wss = new WebSocket.Server({ server });
+let messages: any = [];
 
 export const startWebsocket = () => {
   server.listen(port, () => {
@@ -33,6 +35,7 @@ wss.on("connection", (ws: WebSocket) => {
       }
       prompt = `${prompt}\nAI:${responseMessage}`;
       ws.send(responseMessage);
+      backupChatHistory(message, responseMessage);
     } catch(e) {
       let errorMsg = 'error getting response from openai ' + e;
       ws.send(errorMsg);
@@ -44,7 +47,29 @@ wss.on("connection", (ws: WebSocket) => {
   ws.on('close', () => {
     console.log('see you later');
     prompt = STARTER_PROMPT
+    backUpHistory(messages);
   });
 });
+
+enum UserType {
+  USER = -1,
+  BOT = 0,
+}
+
+const backupChatHistory = (userMessage: string, botMessage: string) => {
+  const userMessageObj = buildMessageObj(userMessage, UserType.USER);
+  const botMessageObj = buildMessageObj(botMessage, UserType.BOT);
+  const messagesToAdd = [userMessageObj, botMessageObj];
+  messages = [...messages, ...messagesToAdd];
+}
+
+const buildMessageObj = (message: string, userType: UserType) => {
+  return {
+    userType,
+    type: 'text',
+    text: message,
+    date: new Date(),
+  };
+}
 
 
