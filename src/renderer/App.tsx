@@ -5,8 +5,7 @@ import 'react-chat-elements/dist/main.css';
 
 const Chat = () => {
   return (
-    <div>
-      <h1>Chat app is building....</h1>
+    <>
       <div>
         <Link to='/'>
           <button type="button">
@@ -17,7 +16,7 @@ const Chat = () => {
       <div>
         <ChatClient />
       </div>
-    </div>
+    </>
   )
 }
 

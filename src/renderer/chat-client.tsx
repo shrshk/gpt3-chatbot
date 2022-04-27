@@ -67,46 +67,38 @@ export const ChatClient = () => {
     setMessageHistory((prev:any) => prev.concat(userMessageObj));
   }
 
-  const connectionStatus = {
-    [ReadyState.CONNECTING]: 'Connecting',
-    [ReadyState.OPEN]: 'Open',
-    [ReadyState.CLOSING]: 'Closing',
-    [ReadyState.CLOSED]: 'Closed',
-    [ReadyState.UNINSTANTIATED]: 'Uninstantiated',
-  }[readyState];
+  const placeHolderText = readyState == ReadyState.OPEN ? "Type Something..." :
+    "Couldn't establish connect with the server";
 
   return (
     <div>
-      <span>The WebSocket is currently {connectionStatus}</span>
-      <div>
-        <MessageList
-          className='message-list'
-          toBottomHeight={'100%'}
-          dataSource={messageHistory}
-        />
-        <Input
-          placeholder="Type Something..."
-          onKeyPress={(e: any) => {
-            if (e.shiftKey && e.charCode === 13) {
+      <MessageList
+        className='message-list'
+        toBottomHeight={'100%'}
+        dataSource={messageHistory}
+      />
+      <Input
+        placeholder={placeHolderText}
+        onKeyPress={(e: any) => {
+          if (e.shiftKey && e.charCode === 13) {
+            return;
+          }else if (e.charCode === 13) {
+            if (readyState !== ReadyState.OPEN) {
               return;
-            }else if (e.charCode === 13) {
-              if (readyState !== ReadyState.OPEN) {
-                return;
-              }
-              handleEnterKey();
             }
-          }}
-          value={messageText}
-          onChange={(e: any) => setMessageText(e.target.value)}
-          rightButtons={
-            <Button
-              text='enter'
-              disabled={readyState !== ReadyState.OPEN}
-              onClick={handleClickSendMessage()}
-            />
+            handleEnterKey();
           }
-        />
-      </div>
+        }}
+        value={messageText}
+        onChange={(e: any) => setMessageText(e.target.value)}
+        rightButtons={
+          <Button
+            text='enter'
+            disabled={readyState !== ReadyState.OPEN}
+            onClick={handleClickSendMessage()}
+          />
+        }
+      />
     </div>
   );
 };

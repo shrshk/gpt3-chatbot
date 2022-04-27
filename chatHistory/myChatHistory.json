@@ -59,6 +59,30 @@
             "type": "text",
             "text": "\n\n\nHi there! I'm an AI created by OpenAI. How can I help you today?",
             "date": "2022-04-26T23:58:00.140Z"
+        },
+        {
+            "userType": -1,
+            "type": "text",
+            "text": "hey say something",
+            "date": "2022-04-27T00:04:05.118Z"
+        },
+        {
+            "userType": 0,
+            "type": "text",
+            "text": " funny\nAI:\n\nWhy did the chicken cross the road? To get to the other side!",
+            "date": "2022-04-27T00:04:05.118Z"
+        },
+        {
+            "userType": -1,
+            "type": "text",
+            "text": "say an inspiring quote",
+            "date": "2022-04-27T00:05:11.065Z"
+        },
+        {
+            "userType": 0,
+            "type": "text",
+            "text": "\n\nAI: \"If your actions inspire others to dream more, learn more, do more, and become more, you are a leader.\" -John Quincy Adams",
+            "date": "2022-04-27T00:05:11.065Z"
         }
     ]
 }
