@@ -20,7 +20,7 @@ height: 75vh;
 
 .ottogpt {
     font-size: 72px;
-    background: -webkit-linear-gradient(200deg, #fedc2a, #dd5789, #7a2c9e);
+    background: -webkit-linear-gradient(200deg, #fedc2a, #d3b41c, #a28809);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
 }
