@@ -1,4 +1,4 @@
-import { useState, useCallback, useEffect } from "react";
+import { useState, useCallback, useEffect } from 'react';
 // @ts-ignore
 import { MessageList, Button } from 'react-chat-elements';
 import { Input } from 'components/Input';
@@ -11,15 +11,15 @@ enum UserType {
 
 const userTypeToFloat = (userType: UserType) => {
   return {
-    [UserType.USER] : 'left',
-    [UserType.BOT] : 'right',
+    [UserType.USER]: 'left',
+    [UserType.BOT]: 'right',
   }[userType];
 };
 
 const userTypeToTitle = (userType: UserType) => {
   return {
-    [UserType.USER] : 'user',
-    [UserType.BOT] : 'bot',
+    [UserType.USER]: 'user',
+    [UserType.BOT]: 'bot',
   }[userType];
 };
 
@@ -28,11 +28,11 @@ const buildMessageObj = (message: string, userType: UserType) => {
     position: userTypeToFloat(userType),
     type: 'text',
     title: userTypeToTitle(userType),
-    titleColor: "#8717ae",
+    titleColor: '#8717ae',
     text: message,
     date: new Date(),
   };
-}
+};
 
 export const ChatClient = () => {
   const socketUrl = 'ws://localhost:4444'; // TO DO: set it from a config file.
@@ -48,32 +48,35 @@ export const ChatClient = () => {
     const botMessageObj = buildMessageObj(lastMessage.data, UserType.BOT);
     let messagesToAdd: any = [];
     messagesToAdd.push(botMessageObj);
-    setMessageHistory((prev:any) => prev.concat(messagesToAdd));
+    setMessageHistory((prev: any) => prev.concat(messagesToAdd));
     setMessageText('');
   }, [lastMessage, setMessageHistory]);
 
-  const handleClickSendMessage = () => useCallback(() => {
-    sendMessage(messageText);
-    addUserMessage();
-  }, [messageText, setMessageText]);
+  const handleClickSendMessage = () =>
+    useCallback(() => {
+      sendMessage(messageText);
+      addUserMessage();
+    }, [messageText, setMessageText]);
 
   const handleEnterKey = () => {
     sendMessage(messageText);
     addUserMessage();
-  }
+  };
 
   const addUserMessage = () => {
     const userMessageObj = buildMessageObj(messageText, UserType.USER);
-    setMessageHistory((prev:any) => prev.concat(userMessageObj));
-  }
+    setMessageHistory((prev: any) => prev.concat(userMessageObj));
+  };
 
-  const placeHolderText = readyState == ReadyState.OPEN ? "Type Something..." :
-    "Couldn't establish connect with the server";
+  const placeHolderText =
+    readyState == ReadyState.OPEN
+      ? 'Type Something...'
+      : "Couldn't establish connect with the server";
 
   return (
     <div>
       <MessageList
-        className='message-list'
+        className="message-list"
         toBottomHeight={'100%'}
         dataSource={messageHistory}
       />
@@ -82,7 +85,7 @@ export const ChatClient = () => {
         onKeyPress={(e: any) => {
           if (e.shiftKey && e.charCode === 13) {
             return;
-          }else if (e.charCode === 13) {
+          } else if (e.charCode === 13) {
             if (readyState !== ReadyState.OPEN) {
               return;
             }
@@ -93,7 +96,7 @@ export const ChatClient = () => {
         onChange={(e: any) => setMessageText(e.target.value)}
         rightButtons={
           <Button
-            text='enter'
+            text="enter"
             disabled={readyState !== ReadyState.OPEN}
             onClick={handleClickSendMessage()}
           />
