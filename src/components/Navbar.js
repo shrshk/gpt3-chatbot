@@ -1,5 +1,5 @@
 import './Navbar.css'
-import logo from '../../assets/ottogpt.png'
+import logo from '../../assets/ottogpt-1.png'
 
 export default function Navbar(props) {
   return (

@@ -16,6 +16,7 @@ export default function Main() {
         <ul className='grid-list'>
           <li>✅ Understands plain English</li>
           <li>✅ Results in seconds</li>
+          <li>✅ Visualize your data </li>
           <li>✅ Available 24/7</li>
         </ul>
         {
