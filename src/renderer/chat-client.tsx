@@ -11,15 +11,15 @@ enum UserType {
 
 const userTypeToFloat = (userType: UserType) => {
   return {
-    [UserType.USER] : 'left',
-    [UserType.BOT] : 'right',
+    [UserType.USER] : 'right',
+    [UserType.BOT] : 'left',
   }[userType];
 };
 
 const userTypeToTitle = (userType: UserType) => {
   return {
-    [UserType.USER] : 'user',
-    [UserType.BOT] : 'bot',
+    [UserType.USER] : 'You',
+    [UserType.BOT] : 'OttoGPT',
   }[userType];
 };
 
@@ -67,38 +67,43 @@ export const ChatClient = () => {
     setMessageHistory((prev:any) => prev.concat(userMessageObj));
   }
 
-  const placeHolderText = readyState == ReadyState.OPEN ? "Type Something..." :
+  const placeHolderText = readyState == ReadyState.OPEN ? "Type your Otto question here..." :
     "Couldn't establish connect with the server";
 
   return (
-    <div>
+    <div className="chat-client-container">
       <MessageList
         className='message-list'
         toBottomHeight={'100%'}
         dataSource={messageHistory}
       />
-      <Input
-        placeholder={placeHolderText}
-        onKeyPress={(e: any) => {
-          if (e.shiftKey && e.charCode === 13) {
-            return;
-          }else if (e.charCode === 13) {
-            if (readyState !== ReadyState.OPEN) {
+      <div className="input-container">
+        <Input
+          className='rce-input'
+          required
+          placeholder={placeHolderText}
+          onKeyPress={(e: any) => {
+            if (e.shiftKey && e.charCode === 13) {
               return;
+            }else if (e.charCode === 13) {
+              if (readyState !== ReadyState.OPEN) {
+                return;
+              }
+              handleEnterKey();
             }
-            handleEnterKey();
+          }}
+          value={messageText}
+          onChange={(e: any) => setMessageText(e.target.value)}
+          rightButtons={
+            <Button
+              text='enter'
+              disabled={readyState !== ReadyState.OPEN}
+              onClick={handleClickSendMessage()}
+            />
           }
-        }}
-        value={messageText}
-        onChange={(e: any) => setMessageText(e.target.value)}
-        rightButtons={
-          <Button
-            text='enter'
-            disabled={readyState !== ReadyState.OPEN}
-            onClick={handleClickSendMessage()}
-          />
-        }
-      />
+        />
+      </div>
     </div>
   );
 };
+
