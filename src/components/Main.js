@@ -6,7 +6,8 @@ import './Main.css'
 
 
 export default function Main() {
-  const imageString = 'data:image/png;base64,iVBORw0KG...'; // Your base64 string here
+  // const imageString = 'data:image/png;base64,iVBORw0KG...'; // Your base64 string here
+  const imageString = ''
 
   return (
     <div className='grid-parent'>
@@ -17,14 +18,17 @@ export default function Main() {
           <li>✅ Results in seconds</li>
           <li>✅ Available 24/7</li>
         </ul>
-        <Card className='message-image'>
-          <CardMedia
-            component="img"
-            height="140"
-            image={imageString}
-            alt="User Image"
-          />
-        </Card>
+        {
+          imageString &&
+          <Card className='message-image'>
+            <CardMedia
+              component="img"
+              height="140"
+              image={imageString}
+              alt="User Image"
+            />
+          </Card>
+        }
       </div>
       <div className='grid-right'>
         <ChatClient />
