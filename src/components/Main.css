@@ -9,6 +9,12 @@ height: 75vh;
 
 .grid-title {
     text-align: center;
+}
+
+.grid-list {
+    margin-bottom: 15px;
+    padding: 15px 0;
+    border-top: #7a2c9e solid 2px;
     border-bottom: #7a2c9e solid 2px;
 }
 
@@ -21,10 +27,15 @@ height: 75vh;
 
 
 .grid-left {
-padding: 30vh 20px;
+padding: 10vh 20px;
 font-size: 30px;
 width: 40vw;
-margin: auto;
+margin: 0 auto;
+}
+
+.message-image {
+    width: 100%;
+    height: 40vh;
 }
 
 .grid-right {
