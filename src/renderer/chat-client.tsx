@@ -24,6 +24,22 @@ const userTypeToTitle = (userType: UserType) => {
 };
 
 const buildMessageObj = (message: string, userType: UserType) => {
+  if (message.startsWith('imageData=')) {
+    const imageData = message.split('imageData=')[1];
+    return {
+      position: userTypeToFloat(userType),
+      type: 'photo',
+      data: {
+        uri: `data:image/png;base64,${imageData}`,
+      },
+      title: userTypeToTitle(userType),
+      titleColor: '#8717ae',
+      text: 'plot',
+      date: new Date(),
+      width: 300,
+      height: 300,
+    };
+  }
   return {
     position: userTypeToFloat(userType),
     type: 'text',
@@ -35,7 +51,7 @@ const buildMessageObj = (message: string, userType: UserType) => {
 };
 
 export const ChatClient = () => {
-  const socketUrl = 'ws://localhost:4444'; // TO DO: set it from a config file.
+  const socketUrl = 'ws://localhost:8000/ws'; // TO DO: set it from a config file.
   const [messageHistory, setMessageHistory] = useState([]);
   const [messageText, setMessageText] = useState('');
 
