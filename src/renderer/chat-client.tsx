@@ -11,15 +11,15 @@ enum UserType {
 
 const userTypeToFloat = (userType: UserType) => {
   return {
-    [UserType.USER] : 'right',
-    [UserType.BOT] : 'left',
+    [UserType.USER]: 'right',
+    [UserType.BOT]: 'left',
   }[userType];
 };
 
 const userTypeToTitle = (userType: UserType) => {
   return {
-    [UserType.USER] : 'You',
-    [UserType.BOT] : 'OttoGPT',
+    [UserType.USER]: 'You',
+    [UserType.BOT]: 'OttoGPT',
   }[userType];
 };
 
@@ -34,10 +34,10 @@ const buildMessageObj = (message: string, userType: UserType) => {
       },
       title: userTypeToTitle(userType),
       titleColor: '#8717ae',
-      text: 'plot',
+      // text: 'plot',
       date: new Date(),
-      width: 300,
-      height: 300,
+      // width: 300,
+      // height: 300,
     };
   }
   return {
@@ -84,8 +84,10 @@ export const ChatClient = () => {
     setMessageHistory((prev: any) => prev.concat(userMessageObj));
   };
 
-  const placeHolderText = readyState == ReadyState.OPEN ? "Type your Otto question here..." :
-    "Couldn't establish connect with the server";
+  const placeHolderText =
+    readyState == ReadyState.OPEN
+      ? 'Type your Otto question here...'
+      : "Couldn't establish connect with the server";
 
   return (
     <div className="chat-client-container">
@@ -96,13 +98,13 @@ export const ChatClient = () => {
       />
       <div className="input-container">
         <Input
-          className='rce-input'
+          className="rce-input"
           required
           placeholder={placeHolderText}
           onKeyPress={(e: any) => {
             if (e.shiftKey && e.charCode === 13) {
               return;
-            }else if (e.charCode === 13) {
+            } else if (e.charCode === 13) {
               if (readyState !== ReadyState.OPEN) {
                 return;
               }
@@ -113,7 +115,7 @@ export const ChatClient = () => {
           onChange={(e: any) => setMessageText(e.target.value)}
           rightButtons={
             <Button
-              text='enter'
+              text="enter"
               disabled={readyState !== ReadyState.OPEN}
               onClick={handleClickSendMessage()}
             />
@@ -123,4 +125,3 @@ export const ChatClient = () => {
     </div>
   );
 };
-
