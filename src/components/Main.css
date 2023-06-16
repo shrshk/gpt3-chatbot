@@ -1,0 +1,40 @@
+.grid-parent {
+display: grid;
+grid-template-columns: auto auto;
+/* background-color: #2196F3; */
+padding: 10px;
+width: 100vw;
+height: 75vh;
+}
+
+.grid-title {
+    text-align: center;
+    border-bottom: #7a2c9e solid 2px;
+}
+
+.ottogpt {
+    font-size: 72px;
+    background: -webkit-linear-gradient(200deg, #fedc2a, #dd5789, #7a2c9e);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+
+.grid-left {
+padding: 30vh 20px;
+font-size: 30px;
+width: 40vw;
+margin: auto;
+}
+
+.grid-right {
+border: #2c309e87 solid 2px;
+background-color: rgba(255, 255, 255, 0.642);
+border-radius: 15px;
+padding: 10px 20px;
+font-size: 30px;
+text-align: center;
+width: 50vw;
+max-height: 750px;
+}
+    

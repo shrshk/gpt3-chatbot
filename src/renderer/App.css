@@ -2,20 +2,32 @@
  * @NOTE: Prepend a `~` to css file paths that are in your node_modules
  *        See https://github.com/webpack-contrib/sass-loader#imports
  */
+ *{
+  padding: 0;
+  margin: 0;
+}
+
 body {
   position: relative;
   color: white;
   height: 100vh;
   background: linear-gradient(
-    200.96deg,
-    #fedc2a -29.09%,
-    #dd5789 51.77%,
-    #7a2c9e 129.35%
+    144.39deg,
+    #ffffff -278.56%,
+    #6d6d6d -78.47%,
+    #11101d 91.61%
   );
   font-family: sans-serif;
   display: flex;
   justify-content: center;
   align-items: center;
+}
+
+.App-header {
+  position: absolute;
+  top: 0;
+  left: 0;
+  margin: 15px;
 }
 
 button {
@@ -60,13 +72,24 @@ a:hover {
   margin: 20px 0;
 }
 
+.chat-client-container {
+  /* background-color: blue;
+  height: 700px; */
+}
+
 .message-list {
   flex: 1;
   min-width: 140px;
   overflow: auto;
+  height: 700px;
+}
+
+.input-container {
+  /* padding-top: 500px; */
+  /* height: 30vh; */
+  /* height: 30% */
 }
 
 .rce-mbox-text {
   color: black;
 }
-
